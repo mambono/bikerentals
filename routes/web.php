@@ -71,7 +71,7 @@ Route::resource('/bookings', 'App\Http\Controllers\BookingsController');
  
 Route::get('/api/bookings/{id}', 'App\Http\Controllers\ApiController@bookings');
 Route::get('/api/vendorbikes/{id}', 'App\Http\Controllers\ApiController@vendorbikes'); 
-Route::get('/api/booking_status/{id}', 'App\Http\Controllers\ApiController@booking_status');
+Route::get('/api/bookingstatus/{id}', 'App\Http\Controllers\ApiController@bookingstatus');
 
 Route::resource('/logout', 'App\Http\Controllers\LogoutController');  
 Route::get('/logout', 'App\Http\Controllers\LoginController@logout'); 

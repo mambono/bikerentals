@@ -1,6 +1,7 @@
 Prerequisite
 
 Please ensure you have XAMPP with Apache and MYSQL Database up and running. You can also use any other PHP application server such as NGINX to run project.
+You will need a minimum of PHP 7.4 and MariaDB 10.1.38-MariaDB or any other close equivalent of Mysql 
 Steps to install
 
     Clone or download this repository:
@@ -53,10 +54,10 @@ This will return a json object of all bookings
 
     	http://localhost/bikerentals/public/api/vendorbikes/{vendorname}
 		
-		GET http://localhost/bikerentals/public/api/bookings/ZuzuBikeshop
+		GET http://localhost/bikerentals/public/api/vendorbikes/ZuzuBikeshop
 
 This will return a json object of all bookings by vendor
 
-    GET http://localhost/bikerentals/public/api/bookings/booked
+    GET http://localhost/bikerentals/public/api/bookingstatus/Booked
 
 This should return a json object of bookings with status booked 

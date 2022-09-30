@@ -57,7 +57,8 @@ class ApiController
 	public function vendorbikes($id)
     { 
 		 
-		$bikes = Bookings::select_vendor_bikes($id); 
+ 
+		$bikes = Bookings::select_vendor_bikes($id);  
 		 
 		 
 		for($i = 0;$i <= sizeof($bikes)-1; $i ++)
@@ -79,17 +80,25 @@ class ApiController
 		return response($json, 200)->header('Content-Type', 'application/json;'); 		
     }
 	
-	public function booking_status($id)
+	public function bookingstatus($id)
     { 
-		if($id == 'booked')
-		{
-			$bikes = Bookings::select_all(); 
+		 
+		$report_data = Bookings::select_by_status($id);  
+ 
+			  
+			foreach($report_data as $object)
+			{
+				$bikes[] =  (array) $object;
+			}
 			
-			 
+		 
+		if($bikes)
+		{			
 			for($i = 0;$i <= sizeof($bikes)-1; $i ++)
 			{ 
-				$bikes[$i]['electric'] = $bikes[$i]['electric'] == 1 ?  'YES'  : 'NO';
 				
+				$bikes[$i]['electric'] = $bikes[$i]['electric'] == 1 ?  'YES'  : 'NO';
+					
 				$bikes[$i]['total_hours'] =  (strtotime($bikes[$i]['end_date']) - strtotime($bikes[$i]['start_date']))/3600;
 				 
 				
@@ -99,11 +108,12 @@ class ApiController
 				
 				$bikes[$i]['totalcost'] = number_format($bikes[$i]['total_hours']*$bikes[$i]['hourly_cost'], 2);
 			}    
-			 
-			$json = json_encode($bikes);  
-			return response($json, 200)->header('Content-Type', 'application/json;'); 			
-		}			
+		}
+		
+		$json = json_encode($bikes);  
+		return response($json, 200)->header('Content-Type', 'application/json;'); 		
     }
+	 
 	
 	public function show()
     {

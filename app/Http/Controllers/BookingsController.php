@@ -271,6 +271,7 @@ class BookingsController extends Controller
 			$form_data['booked_by'] = Auth::id(); 
 			$form_data['booked_on'] = date('Y-m-d H:i:s');
 			$form_data['bike_id'] = $id;
+			$form_data['status'] = 'Booked';
 			$form_data['delete_flag'] = 0;
 			unset($form_data['_token']);
 			

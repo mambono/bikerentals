@@ -90,7 +90,28 @@ class Bookings extends Model
 		->orderby('bikes.short_name', 'desc') 
 		->get();   
 		return	$sql;  
-	}  
+	}
+	
+	public static function select_booked($id)
+	{
+		$sql = Bikes::select('bikes.id',   'bikes.city_id', 'bikes.vendor_id', 'bikes.short_name', 'bikes.color', 'bikes.hourly_cost', 'bikes.size', 'cities.city', 'bike_bookings.start_date', 'bike_bookings.end_date', 'vendors.vendor_name', DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name'))
+		->join('cities', 'bikes.city_id', '=', 'cities.id') 
+		->join('bike_bookings', 'bike_bookings.bike_id', '=', 'bikes.id')  
+		->join('vendors', 'vendors.id', '=', 'bikes.vendor_id')  
+		->join('users', 'bike_bookings.booked_by', '=', 'users.id')    
+		->where(['bikes.delete_flag'=>0, 'bike_bookings.delete_flag'=>0, 'bike_bookings.status'=>$id])
+		->groupby()
+		->orderby('bikes.short_name', 'desc') 
+		->get();   
+	}	
+	public static function select_by_status($id)
+	{
+		$query = "SELECT bikes.id,  bikes.city_id, bikes.vendor_id, bikes.short_name, bikes.color, bikes.hourly_cost, bikes.size, bikes.electric, cities.city, bike_bookings.start_date, bike_bookings.end_date, vendors.vendor_name, CONCAT(users.first_name, ' ', users.last_name) AS full_name FROM bikes  INNER JOIN cities on bikes.city_id = cities.id  INNER JOIN bike_bookings on bikes.id = bike_bookings.bike_id INNER JOIN vendors on bikes.vendor_id = vendors.id INNER JOIN users on bike_bookings.booked_by= users.id WHERE bikes.delete_flag = 0 AND bike_bookings.delete_flag  = 0  AND bike_bookings.status = '$id'";
+		$sql = DB::select($query);
+		
+		return	$sql;  
+	}
+	
 	
 	public static function select_single($id)
 	{
