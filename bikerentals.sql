@@ -13,11 +13,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-
 CREATE USER 'biker'@'localhost' IDENTIFIED BY 'R3ntal';
 GRANT USAGE ON *.* TO 'biker'@'localhost';
 GRANT SELECT, DELETE, INSERT, UPDATE  ON `bike\_rental`.* TO 'biker'@'localhost';
 FLUSH PRIVILEGES;
+
 
 -- Dumping database structure for bike_rental
 CREATE DATABASE IF NOT EXISTS `bike_rental` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `bike_bookings` (
   `booked_by` int(11) DEFAULT NULL,
   `bike_id` int(11) DEFAULT NULL,
   `booked_on` datetime DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
@@ -88,19 +89,19 @@ CREATE TABLE IF NOT EXISTS `bike_bookings` (
 
 -- Dumping data for table bike_rental.bike_bookings: ~12 rows (approximately)
 /*!40000 ALTER TABLE `bike_bookings` DISABLE KEYS */;
-INSERT INTO `bike_bookings` (`id`, `booked_by`, `bike_id`, `booked_on`, `start_date`, `end_date`, `modified_by`, `modified_on`, `delete_flag`) VALUES
-	(1, 3, 2, '2022-09-30 10:29:47', '2022-10-05 20:24:00', '2022-10-05 22:24:00', NULL, NULL, 0),
-	(2, 3, 9, '2022-09-30 10:31:08', '2022-09-02 22:30:00', '2022-09-04 22:30:00', NULL, NULL, 0),
-	(3, 3, 11, '2022-09-30 10:31:37', '2022-09-04 22:31:00', '2022-09-04 23:31:00', NULL, NULL, 0),
-	(4, 3, 4, '2022-10-01 20:08:43', '2022-09-09 23:08:00', '2022-09-10 23:08:00', NULL, NULL, 0),
-	(5, 3, 4, '2022-10-01 20:08:43', '2022-09-09 23:08:00', '2022-09-10 23:08:00', NULL, NULL, 0),
-	(6, 1, 4, '2022-10-01 20:08:43', '2022-09-09 23:08:00', '2022-09-10 23:08:00', NULL, NULL, 0),
-	(7, 3, 4, '2022-10-01 20:08:43', '2022-09-16 23:08:00', '2022-09-17 23:08:00', NULL, NULL, 0),
-	(8, 3, 3, '2022-10-02 20:08:43', '2022-09-01 23:14:00', '2022-09-02 23:14:00', NULL, NULL, 0),
-	(9, 7, 11, '2022-10-03 20:08:43', '2022-09-03 23:15:00', '2022-09-04 23:15:00', NULL, NULL, 0),
-	(10, 3, 10, '2022-10-03 20:08:43', '2022-09-10 21:16:00', '2022-09-10 23:16:00', NULL, NULL, 1),
-	(11, 7, 10, '2022-10-04 20:08:43', '2022-09-01 10:20:00', '2022-09-04 10:20:00', 7, '2022-09-30 10:30:04', 0),
-	(12, 7, 10, '2022-10-05 20:08:43', '2022-09-01 10:24:00', '2022-09-04 10:24:00', NULL, NULL, 0);
+INSERT INTO `bike_bookings` (`id`, `booked_by`, `bike_id`, `booked_on`, `status`, `start_date`, `end_date`, `modified_by`, `modified_on`, `delete_flag`) VALUES
+	(1, 3, 2, '2022-09-30 10:29:47', 'Booked', '2022-10-05 20:24:00', '2022-10-05 22:24:00', NULL, NULL, 0),
+	(2, 3, 9, '2022-09-30 10:31:08', NULL, '2022-09-02 22:30:00', '2022-09-04 22:30:00', NULL, NULL, 0),
+	(3, 3, 11, '2022-09-30 10:31:37', 'Booked', '2022-09-04 22:31:00', '2022-09-04 23:31:00', NULL, NULL, 0),
+	(4, 3, 4, '2022-10-01 20:08:43', 'Paid', '2022-09-09 23:08:00', '2022-09-10 23:08:00', NULL, NULL, 0),
+	(5, 3, 4, '2022-10-01 20:08:43', 'Booked', '2022-09-09 23:08:00', '2022-09-10 23:08:00', NULL, NULL, 0),
+	(6, 1, 4, '2022-10-01 20:08:43', NULL, '2022-09-09 23:08:00', '2022-09-10 23:08:00', NULL, NULL, 0),
+	(7, 3, 4, '2022-10-01 20:08:43', 'Paid', '2022-09-16 23:08:00', '2022-09-17 23:08:00', NULL, NULL, 0),
+	(8, 3, 3, '2022-10-02 20:08:43', NULL, '2022-09-01 23:14:00', '2022-09-02 23:14:00', NULL, NULL, 0),
+	(9, 7, 11, '2022-10-03 20:08:43', 'Cancelled', '2022-09-03 23:15:00', '2022-09-04 23:15:00', NULL, NULL, 0),
+	(10, 3, 10, '2022-10-03 20:08:43', NULL, '2022-09-10 21:16:00', '2022-09-10 23:16:00', NULL, NULL, 1),
+	(11, 7, 10, '2022-10-04 20:08:43', 'Cancelled', '2022-09-01 10:20:00', '2022-09-04 10:20:00', 7, '2022-09-30 10:30:04', 0),
+	(12, 7, 10, '2022-10-05 20:08:43', NULL, '2022-09-01 10:24:00', '2022-09-04 10:24:00', NULL, NULL, 0);
 /*!40000 ALTER TABLE `bike_bookings` ENABLE KEYS */;
 
 -- Dumping structure for table bike_rental.cities
@@ -138,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
--- Dumping data for table bike_rental.feedback: ~0 rows (approximately)
+-- Dumping data for table bike_rental.feedback: ~4 rows (approximately)
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
 INSERT INTO `feedback` (`id`, `comments`, `created_by`, `created_on`, `delete_flag`) VALUES
 	(1, 'I love the variety of bikes in place', 3, '2022-09-30 10:56:51', 0),
@@ -193,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table bike_rental.users: ~9 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `group_id`, `first_name`, `last_name`, `password`, `remember_token`, `email`, `mobile_number`, `created_on`, `modified_by`, `modified_on`, `delete_flag`) VALUES
-	(1, 1, 'System', 'Admin', '$2y$10$j2Y/VEIWFSwh.kXDAB4oKODJfotVfil9khTZUs/Oo5N/V9yUn8uxy', 'HuaH5PPKw6LFUOWfwhr1L6KD0X4v0mFGOaRh4EMrtx8iTgDmc1Oo6eTbqA3W', 'admin@bikes.com', NULL, '2022-09-30 10:14:26', NULL, NULL, 0),
+	(1, 1, 'System', 'Admin', '$2y$10$j2Y/VEIWFSwh.kXDAB4oKODJfotVfil9khTZUs/Oo5N/V9yUn8uxy', 'WFrNbEAdxpmwGiGCZL1vFGCMDDQSaqpBrqEoU7EVSfbsEbOxxi1Nm7sSgWo6', 'admin@bikes.com', NULL, '2022-09-30 10:14:26', NULL, NULL, 0),
 	(2, 4, 'System', 'Guest', '$2y$10$j2Y/VEIWFSwh.kXDAB4oKODJfotVfil9khTZUs/Oo5N/V9yUn8uxy', NULL, 'guest@bikes.com', NULL, '2022-09-30 10:24:26', NULL, NULL, 0),
 	(3, 3, 'Paul', 'Maina', '$2y$10$j2Y/VEIWFSwh.kXDAB4oKODJfotVfil9khTZUs/Oo5N/V9yUn8uxy', '1qtwjEVU1jdQZkLdz64vJMDvoBbGz1Z4zKYFnhof5qTLoM1ESi7nXJ8RfiB8', 'mambono@mambono.com', '0722822791', '2022-09-30 10:24:26', NULL, NULL, 0),
 	(4, 2, 'Paul', 'Mwangi', '$2y$10$R8D8v4fK1hGJdz1p2iJbjeeMmYwHT7sZy/XZ0e6Jow4pfRvlmlDgO', 'RYmpL09F6W1mZZXjq6aL8IvrznaNM7LgVjd8erQZtzu9UuCZxQPahIY4H57H', 'mambono@gmail.com', '0722822791', '2022-09-30 10:24:26', NULL, NULL, 0),
