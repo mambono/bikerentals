@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller; 
-use App\models\Cities;  
-use App\models\User;
+use App\Models\Cities;  
+use App\Models\User;
 use Auth;
 use DB;
 use Request;

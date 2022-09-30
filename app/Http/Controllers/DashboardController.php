@@ -2,11 +2,11 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller; 
-use App\models\Bikes;  
-use App\models\Cities; 
+use App\Models\Bikes;  
+use App\Models\Cities; 
 use App\Http\Models\Modules;
-use App\models\User;
-use App\models\Dashboard;
+use App\Models\User;
+use App\Models\Dashboard;
 use Auth;
 use DB;
 use Request;

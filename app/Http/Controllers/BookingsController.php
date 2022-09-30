@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller; 
-use App\models\Bikes;  
-use App\models\Bookings; 
-use App\models\User;
-use App\models\Vendors;
+use App\Models\Bikes;  
+use App\Models\Bookings; 
+use App\Models\User;
+use App\Models\Vendors;
 use Auth;
 use DB;
 use Redirect;
