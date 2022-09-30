@@ -24,7 +24,7 @@ php artisan key:generate
 
     Import/Dump the database
 
-Import/Dump `bikerentals.sql` found inside app\database\dump directory in this repo
+Import/Dump `bikerentals.sql` in this repo
 
     Database credentials
 

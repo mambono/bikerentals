@@ -28,17 +28,29 @@
 
                     {{ __('You are logged in!') }}
                 </div>
-				<div class="col-md-12  row">
-					<div class="col-md-4" style="border: 1px solid #ccc;">
-							<div id="vendorbikes_count"></div>
-					</div>
-					<div class="col-md-4" style="border: 1px solid #ccc;">
-						<div id="customerbookings"></div>
-					</div>
-					<div class="col-md-4" style="border: 1px solid #ccc; vertical-align: top;">
-						<div style="margin-top:18px;" id="bikes-table-div"  class="data_holder">
-					</div>
-				</div> 
+				<?PHP  
+					if($usergroupname == 'Administrator')
+					{
+						?>
+						
+						<div class="col-md-12  row">
+							<div class="col-md-4" style="border: 1px solid #ccc;">
+									<div id="vendorbikes_count"></div>
+							</div>
+							<div class="col-md-4" style="border: 1px solid #ccc;">
+								<div id="customerbookings"></div>
+							</div>
+							<div class="col-md-4" style="border: 1px solid #ccc; vertical-align: top;">
+								<div style="margin-top:18px;" id="bikes-table-div"  class="data_holder"></div>
+							</div>
+						</div> 
+						<?PHP
+					}
+					 
+			  ?>
+				
+				
+				
             </div>
         </div>
 		
